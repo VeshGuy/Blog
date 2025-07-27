@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flasker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #343a40;
+            color: white;
+            padding: 10px 20px;
+        }
+        .navbar-brand {
+            font-size: 24px;
+            text-decoration: none;
+            color: white;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .navbar-toggler {
+            display: none;
+        }
+        .navbar-collapse {
+            display: flex;
+        }
+        .navbar-nav {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-item {
+            margin: 0 10px;
+        }
+        .nav-link{
+            color: black;
+            
+        }
+        .logout-btn{
+            background-color: #343a40;
+            padding: 5px;
+        }
+        .form-control {
+            padding: 5px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+        .btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-outline-secondary {
+            color: #6c757d;
+            background-color: transparent;
+            border: 1px solid #6c757d;
+        }
+        .btn-outline-secondary:hover {
+            color: white;
+            background-color: #6c757d;
+        }
+        .search-form {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="navbar-brand" href="{{ url_for('dashboard') }}">Flasker</a>
+        <div class="navbar-collapse">
+            <ul class="navbar-nav">
+            
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('all_blogs')}}">View Blogs</a>
+                </li>
+                {% if current_user.is_authenticated %}
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('add_blog')}}">Add Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard')}}">Dashboard</a>
+                    </li>
+                    {% if current_user.id == 1 %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('display')}}">Admin</a>
+                        </li>
+                    {% endif %}
+                    <form method="POST" action="{{ url_for('search') }}">
+                        {{ form.hidden_tag() }}
+                        <input class="form-control me-2" type="search" placeholder="Search" name="search">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </form>
+                    <li class="nav-item">
+                        <button class="logout-btn"><a class="nav-link" href="{{ url_for('logout')}}">Logout</a></button>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('signup')}}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login')}}">Login</a>
+                    </li>
+                {% endif %}
+                
+                
+                
+            </ul>
+
+                    
+        </div>
+    </nav>
+</body>
+</html>

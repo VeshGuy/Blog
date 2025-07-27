@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}
+    User Dashboard
+{% endblock title %}
+{% block head %}
+    <style>
+        .logout{
+            color: black;
+            text-decoration: none;
+        }
+        .logout-btn-dash{
+            padding: 5px;
+            background-color: skyblue;
+        }
+    </style>
+{% endblock head %}
+{% block content %}
+    
+    <h1>Profile Pic</h1>
+    <p>{{user.profile_pic}}</p>
+    {% if user.profile_pic %}
+        <img src=" {{ url_for('static', filename='images/' + user.profile_pic) }}" width="50">
+    {% else %}
+        <img src=" {{ url_for('static', filename='images/4llama.png') }}" width="50">
+    {% endif %}
+    <p>Name - {{user.name}}</p><br>
+    <p>Email - {{user.email}}</p><br>
+    <p>Favourite Color - {{user.favcol}}</p><br>
+    <button class="logout-btn-dash"><a class="logout" href="{{ url_for('logout') }}">Logout</a></button>
+{% endblock content %}

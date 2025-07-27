@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+    All Blogs
+{% endblock %}
+{% block head %}
+    <style>
+        .blog-post {
+            background-color: beige;
+            box-shadow: 5px;
+            padding-left: 5px;
+            margin-left: 5px;
+        }
+        .more-link {
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+{% endblock head %}
+{% block content %}
+    {% for post in posts %}
+        <div class="blog-post">
+            <h1><a href="/show_blog/{{ post.slug }}/{{ post.id }}">{{ post.title }}</a></h1>
+            <h5>{{ post.author }}</h5>
+            <p>{{ post.slug }}</p>
+            
+            {% if post.content | length > 50 %}
+                <p>{{ post.content[:50] }}... <span class="more-link" onclick="window.location.href='/show_blog/{{ post.slug }}/{{ post.id }}'">more</span></p>
+            {% else %}
+                <p>{{ post.content }}</p>
+            {% endif %}
+            
+            <p>{{ post.date_posted }}</p>
+            
+            {% if current_user.is_authenticated and post.poster.id == current_user.id %}
+                <button><a href="/delete/{{ post.id }}">Delete</a></button>
+                <button><a href="/update/{{ post.id }}">Update</a></button>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Signup{% endblock %}
+{% block head %}
+<style>
+    .form{
+        background-color: aqua;
+    }
+    .username{
+        background-color: brown;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+{% endblock %}
+{% block content %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h1> SIGNUP </h1><br>
+
+    <div class="form">
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+
+            <div class="username">
+                {{ form.username.label(class="form-label") }}
+
+                {{ form.username(class="form-control") }}
+            </div>
+            
+            <br>
+            {{ form.email.label(class="form-label") }}
+
+            {{ form.email(class="form-control") }}
+            <br>
+            {{ form.password.label(class="form-label") }}
+
+            {{ form.password(class="form-control") }}
+            <br>
+            {{ form.favcol.label(class="form-label") }}
+
+            {{ form.favcol(class="form-control") }}
+            <br>
+            {{ form.profile_pic.label(class="form-label") }}
+
+            {{ form.profile_pic(class="form-control") }}
+            <br>
+            {{ form.submit(class="btn btn-secondary") }}
+        </form>
+    </div>
+{% endblock %}

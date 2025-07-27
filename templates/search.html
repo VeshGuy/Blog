@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+    Searched Result
+{% endblock title %}
+{% block content %}
+    <h1> you searched for...</h1>
+    {{ searched }}
+    <br><br>
+    {% for post in posts %}
+        <p>{{loop.index}}) <a href="/show_blog/{{post.slug}}/{{post.id}}">{{ post.title }}</a></p>
+    {% endfor %}
+{% endblock content %}

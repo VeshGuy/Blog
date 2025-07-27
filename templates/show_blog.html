@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}
+{{post.title}}
+{% endblock %}
+{% block head %}
+    <style>
+        .blog-post{
+            margin-left: 10px;
+        }
+    </style>
+{% endblock head %}
+
+<!--
+    The individual blog is shown and the update and delete option is shown to only the authorised user
+-->
+
+{% block content %}
+    <div class="blog-post">
+        <h1>{{ post.title }}</h1>
+        <h5>{{ post.author }}</h5>
+        <p>{{ post.slug }}</p>
+        <p>{{ post.content }}</p>
+        <p>{{post.date_posted}}</p>
+        {% if current_user.id==post.poster.id %}
+            <button><a href="/delete/{{post.id}}">Delete</a></button>
+            <button><a href="/update/{{post.id}}">Update</a></button>
+        {% endif %}
+    </div>
+{% endblock %}
